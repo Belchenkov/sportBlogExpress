@@ -1,8 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-    res.send('Manage');
+router.get('/articles', (req, res, next) => {
+    res.render('manage_articles', {
+        title: 'Manage Articles'            
+    });
+});
+
+router.get('/categories', (req, res, next) => {
+    res.render('manage_categories', {
+        title: 'Manage Categories'            
+    });
 });
 
 router.get('/articles/add', (req, res, next) => {
@@ -16,5 +24,18 @@ router.get('/categories/add', (req, res, next) => {
         title: 'Create Category'
     });
 });
+
+router.get('/articles/edit/:id', (req, res, next) => {
+    res.render('edit_article', {
+        title: 'Edit Article'            
+    });
+});
+
+router.get('/categories/edit/:id', (req, res, next) => {
+    res.render('edit_category', {
+        title: 'Edit Category'            
+    });
+});
+
 
 module.exports = router;
