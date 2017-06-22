@@ -4,11 +4,15 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
+const mongoose = require('mongoose');
 
 // Init app
 const app = express();
 
 const port = '3000';
+
+// Mongoose Connect 
+mongoose.connect('mongodb://belchenkov:mongomaster88@ds133922.mlab.com:33922/sportblog');
 
 const index = require('./routes/index');
 const articles = require('./routes/articles');
