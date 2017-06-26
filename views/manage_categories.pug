@@ -2,4 +2,27 @@
 extends layout
 
 block content
-    h1 #{title}
+    .container
+        .row
+            h1.z-depth-4.center-align #{title}
+
+            table.centered
+                tr
+                    td
+                        strong
+                            | Categories Title
+                    td
+                        strong
+                            | Update Category
+                    td
+                        strong
+                            | Remove Category
+                each category, i in categories
+                    tr
+                        td #{category.title}
+                        td
+                            a.btn.amber.hoverable(href='/manage/categories/edit/'+category._id)  Edit
+                                i.material-icons.right mode_edit
+                        td
+                            a.category-delete.btn.red.darken-3.hoverable(href='#' data-cat-id=category._id)  Delete
+                                i.material-icons.right delete

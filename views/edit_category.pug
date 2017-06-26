@@ -2,4 +2,25 @@
 extends layout
 
 block content
-    h1 #{title}
+    .container
+        .row
+            h1.z-depth-4.center-align #{title}
+
+            form.col.s9.offset-s2(method="post", action="/categories/edit/" + category._id)
+                .row
+                    .input-field.col.s10
+                        input#title.validate(value=category.title, type='text', name="title")
+                        label.active(for='title') Title
+                .row
+                    .input-field.col.s10
+                        textarea#description.materialize-textarea(name="description")
+                            | #{category.description}
+                        label(for='description') Description
+                .row
+                    a.btn.col.s3.btn-large.waves-effect.waves-light(href="/manage/categories" class="back light-blue darken-2")
+                        i.material-icons.right settings_backup_restore
+                        | Back
+                    button.col.s3.offset-s4.btn.btn-large.waves-effect.waves-light(type='submit', class="orange darken-3" name='submit')
+                        i.material-icons.right mode_edit
+                        | Update
+
