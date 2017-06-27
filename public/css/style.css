@@ -8,3 +8,19 @@ h1.center-align {
     background-color: dimgrey;
     color: #fff;
 }
+
+.add-category {
+    margin: 10px 0;
+}
+
+.add-category:hover {
+    background-color: darkcyan!important;
+}
+
+table tr td a {
+    display: block;
+}
+
+footer {
+    padding: 10px 0;
+}

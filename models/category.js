@@ -32,3 +32,9 @@ module.exports.updateCategory = function (query, update, options, callback) {
     Category.findOneAndUpdate(query, update, options, callback);
 };
 
+// Delete Category
+module.exports.removeCategory = function (query, callback) {
+    Category.remove(query, callback);
+};
+
+
