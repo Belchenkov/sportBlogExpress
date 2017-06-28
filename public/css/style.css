@@ -1,3 +1,13 @@
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+ 
+.content {
+    flex: 1;
+}
+
 .back {
     margin-left: 100px;
 }
@@ -21,6 +31,5 @@ table tr td a {
     display: block;
 }
 
-footer {
-    padding: 10px 0;
+footer p {
 }

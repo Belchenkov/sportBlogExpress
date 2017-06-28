@@ -11,7 +11,7 @@ $(function () {
             success: (respopnse) => {
                 window.location.href='/manage/categories';
               
-                Materialize.toast('Category Removed!', 4000) 
+                Materialize.toast('Category Removed!', 4000); 
               
             },
             error: (error) => {
@@ -19,4 +19,8 @@ $(function () {
             }
         });
     }); // end on()
+
+    // Initialization Select
+    $('select').material_select();
+    
 });

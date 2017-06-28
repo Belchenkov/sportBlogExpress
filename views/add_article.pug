@@ -1,4 +1,38 @@
 extends layout
 
 block content
-    h1 #{title}
+    .container
+        h1.center #{title}
+        .row
+            form.col.s9.offset-s2(method="post", action="/articles/add")
+                .row
+                    .input-field.col.s10
+                        input#title.validate(value='', type='text', name="title")
+                        label.active(for='title') Title
+                .row
+                    .input-field.col.s10
+                        input#Subtitle.validate(value='', type='text', name="Subtitle")
+                        label.active(for='Subtitle') Subtitle
+                .row
+                    .input-field.col.s10
+                        select(name="category")
+                            <option disabled selected>Choose Category</option>
+                            each category, i in categories
+                                option(value=category._id) #{category.title}
+
+                .row
+                    .input-field.col.s10
+                        input#Author.validate(value='', type='text', name="Author")
+                        label.active(for='Subtitle') Author
+                
+                .row
+                    .input-field.col.s10
+                        textarea#body.materialize-textarea(name="body")
+                        label(for='body') Body
+                .row
+                    a.btn.col.s3.btn-large.waves-effect.waves-light(href="/manage/categories" class="back light-blue darken-2")
+                        i.material-icons.right settings_backup_restore
+                        | Back
+                    button.col.s3.offset-s4.btn.btn-large.waves-effect.waves-light(type='submit', class="grey darken-3" name='submit')
+                        i.material-icons.right note_add
+                        | Create
