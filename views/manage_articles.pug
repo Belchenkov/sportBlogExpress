@@ -2,4 +2,43 @@
 extends layout
 
 block content
-    h1 #{title}
+    .container
+        .row
+            h1.z-depth-4.center-align #{title}
+           
+            a.right.col.s3.btn.btn-large.waves-effect.waves-light(href="/manage/articles/add" class="add-Article grey darken-3")
+                    i.material-icons.right note_add
+                    | Add Article
+
+            table.centered
+                tr
+                    th
+                        strong
+                            | Articles Title
+                    th
+                        strong
+                            | Date Published
+                    th
+                        strong
+                            | Articles SubTitle
+                    th
+                        strong
+                            | Author
+                    th
+                        strong
+                            | Update Article
+                    th
+                        strong
+                            | Remove Article
+                each article, i in articles
+                    tr
+                        td #{article.title}
+                        td #{moment(article.created_at).format('MMMM Do YYYY, h:mm:ss a')}
+                        td #{article.subtitle}
+                         td #{article.author}
+                        td
+                            a.btn.amber.hoverable(href='/manage/articles/edit/'+article._id)  Edit
+                                i.material-icons.right mode_edit
+                        td
+                            a.Article-delete.btn.red.darken-3.hoverable(href='/manage/articles' data-cat-id=article._id)  Delete
+                                i.material-icons.right delete
