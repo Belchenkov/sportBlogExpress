@@ -24,43 +24,84 @@ router.get('/category/:category_id', (req, res, next) => {
 
 // Add Article -- POST
 router.post('/add', (req, res, next) => {
-    let article = new Article(); 
 
-    article.title = req.body.title;
-    article.subtitle = req.body.subtitle;
-    article.category = req.body.category;
-    article.body = req.body.body;
-    article.author = req.body.author;
+    req.checkBody('title', 'Title is required').notEmpty();
+    req.checkBody('author', 'Author is required').notEmpty();
+    req.checkBody('category', 'Category is required').notEmpty();
+    req.checkBody('body', 'Body is required').notEmpty();
 
-    Article.addArticle(article, (err, article) => {
-        if (err) {
-            res.send(err);
-        }
+    let errors = req.validationErrors();
 
-        res.redirect('/manage/articles');
-    });
+    if (errors) {
+        Category.getCategories((err, categories) => {
+            res.render('add_article', {
+                errors: errors,
+                categories: categories,
+                title : 'Add Article'
+            });
+        }); 
+        
+    } else {
+        let article = new Article(); 
+
+        article.title = req.body.title;
+        article.subtitle = req.body.subtitle;
+        article.category = req.body.category;
+        article.body = req.body.body;
+        article.author = req.body.author;
+
+        Article.addArticle(article, (err, article) => {
+            if (err) {
+                res.send(err);
+            }
+
+            res.redirect('/manage/articles');
+        });
+    }    
+
+    
 });
 
 // Edit Article -- POST
 router.post('/edit/:id', (req, res, next) => {
-    let article = new Article(); 
-    const query = {_id: req.params.id}
 
-    const update = {
-        title: req.body.title,
-        subtitle: req.body.subtitle,
-        category: req.body.category,
-        author: req.body.author,
-        body: req.body.body
-    }
+ req.checkBody('title', 'Title is required').notEmpty();
+    req.checkBody('author', 'Author is required').notEmpty();
+    req.checkBody('category', 'Category is required').notEmpty();
+    req.checkBody('body', 'Body is required').notEmpty();
 
-    Article.updateArticle(query, update, {}, (err, article) => {
-        if (err) {
-            res.send(err);
+    let errors = req.validationErrors();
+
+    if (errors) {
+        Category.getCategories((err, categories) => {
+            res.render('edit_article', {
+                errors: errors,
+                categories: categories,
+                title : 'Edit Article'
+            });
+        }); 
+    } else {
+        let article = new Article(); 
+        const query = {_id: req.params.id}
+
+        const update = {
+            title: req.body.title,
+            subtitle: req.body.subtitle,
+            category: req.body.category,
+            author: req.body.author,
+            body: req.body.body
         }
 
-        res.redirect('/manage/articles');
-    });
+        Article.updateArticle(query, update, {}, (err, article) => {
+            if (err) {
+                res.send(err);
+            }
+
+            res.redirect('/manage/articles');
+        });
+    }
+
+    
 });
 
 // Delete Article -- POST

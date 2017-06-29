@@ -4,6 +4,10 @@ extends layout
 block content
     .container
         h1.center #{title}
+        ul.errors
+            if errors
+                each error, i in errors
+                    li.card-panel.red.accent-2.white-text #{error.msg}
         .row
             form.col.s9.offset-s2(method="post", action="/categories/add")
                 .row

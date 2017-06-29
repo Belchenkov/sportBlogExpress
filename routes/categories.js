@@ -21,38 +21,62 @@ router.get('/', (req, res, next) => {
 
 // Add New Category
 router.post('/add', (req, res, next) => {
+
+    req.checkBody('title', 'This fiels is required!').notEmpty();
+
+    let errors = req.validationErrors();
+
+    if (errors) {
+        res.render('add_category', {
+            errors: errors,
+            title : 'Create Category'
+        });
+    } else {
+        category.title = req.body.title;
+        category.description = req.body.description;
+
+        Category.addCategory(category, (err, category) => {
+            if (err) {
+                res.send(err);
+            }
+
+            res.redirect('/manage/categories');
+        });
+    }
+
     let category = new Category();
 
-    category.title = req.body.title;
-    category.description = req.body.description;
-
-    Category.addCategory(category, (err, category) => {
-        if (err) {
-            res.send(err);
-        }
-
-        res.redirect('/manage/categories');
-    });
 });
 
 // Edit Category
 router.post('/edit/:id', (req, res, next) => {
-    let category = new Category();
-    const query = {_id: req.params.id};
+    
+    req.checkBody('title', 'This fiels is required!').notEmpty();
+    let errors = req.validationErrors();
 
-    const update = {
-        title: req.body.title,
-        description: req.body.description,
-    };
+    if (errors) {
+        res.render('edit_category', {
+            errors: errors,
+            title : 'Edit Category'
+        });
+    } else {
+        let category = new Category();
+        const query = {_id: req.params.id};
+
+        const update = {
+            title: req.body.title,
+            description: req.body.description,
+        };
 
 
-    Category.updateCategory(query, update, {}, (err, category) => {
-        if (err) {
-            res.send(err);
-        }
+        Category.updateCategory(query, update, {}, (err, category) => {
+            if (err) {
+                res.send(err);
+            }
 
-        res.redirect('/manage/categories');
-    });
+            res.redirect('/manage/categories');
+        });
+    }
 });
 
 // Delete Category -- DELETE 
