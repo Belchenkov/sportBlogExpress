@@ -32,6 +32,8 @@ router.post('/add', (req, res, next) => {
             title : 'Create Category'
         });
     } else {
+        let category = new Category();
+        
         category.title = req.body.title;
         category.description = req.body.description;
 
@@ -39,12 +41,11 @@ router.post('/add', (req, res, next) => {
             if (err) {
                 res.send(err);
             }
-
+            req.flash('success', 'Category Saved');
             res.redirect('/manage/categories');
         });
     }
 
-    let category = new Category();
 
 });
 
@@ -73,7 +74,7 @@ router.post('/edit/:id', (req, res, next) => {
             if (err) {
                 res.send(err);
             }
-
+             req.flash('success', 'Category Updated');
             res.redirect('/manage/categories');
         });
     }

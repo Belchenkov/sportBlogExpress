@@ -54,7 +54,7 @@ router.post('/add', (req, res, next) => {
             if (err) {
                 res.send(err);
             }
-
+            req.flash('success', 'Article Added');
             res.redirect('/manage/articles');
         });
     }    
@@ -96,7 +96,7 @@ router.post('/edit/:id', (req, res, next) => {
             if (err) {
                 res.send(err);
             }
-
+            req.flash('success', 'Article Updated');
             res.redirect('/manage/articles');
         });
     }
