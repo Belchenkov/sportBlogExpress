@@ -20,7 +20,26 @@ $(function () {
         });
     }); // end on()
 
-    // Initialization Select
-    $('select').material_select();
-    
+    // AJAX Delete Article
+    $('a.article-delete.btn.red.darken-3.hoverable').on('click', (e) => {
+
+        $target = $(e.target);
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/articles/delete/' + $target.attr('data-art-id'),
+            success: (respopnse) => {
+                window.location.href='/manage/articles';
+              
+                Materialize.toast('Article Removed!', 4000); 
+              
+            },
+            error: (error) => {
+                console.log('error');
+            }
+        });
+    });
 });
+
+// Initialization Select
+$('select').material_select();

@@ -35,10 +35,10 @@ block content
                         td #{article.title}
                         td #{moment(article.created_at).format('MMMM Do YYYY, h:mm:ss a')}
                         td #{article.subtitle}
-                         td #{article.author}
+                        td #{article.author}
                         td
                             a.btn.amber.hoverable(href='/manage/articles/edit/'+article._id)  Edit
-                                i.material-icons.right mode_edit
+                                i.material-icons.left mode_edit
                         td
-                            a.Article-delete.btn.red.darken-3.hoverable(href='/manage/articles' data-cat-id=article._id)  Delete
-                                i.material-icons.right delete
+                            a.article-delete.btn.red.darken-3.hoverable(href='/manage/articles' data-art-id=article._id)  Delete
+                                i.material-icons.left delete
