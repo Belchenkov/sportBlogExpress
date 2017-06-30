@@ -14,8 +14,11 @@ head
 body
     .wrapper
         .content
-            block content
-        footer.center-align.blue-grey   
+       
+           include ./includes/navbar.pug
+           
+           block content
+        footer.center-align.teal.white-text   
             .container
                 p
                     Copyright &copy; 2017, SportsBlog

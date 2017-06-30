@@ -49,6 +49,15 @@ module.exports.getArticles = function (callback, limit) {
     Article.find(callback).limit(limit).sort([['created_at', 'ascending']]);
 };
 
+// Get Article By Category
+module.exports.getCategoryArticles = function (categoryId, callback) {
+
+    let query = {category: categoryId};
+    
+    Article.find(query, callback).sort([['created_at', 'ascending']]);
+};
+
+
 // Add Article
 module.exports.addArticle = function (article, callback) {
     Article.create(article, callback);

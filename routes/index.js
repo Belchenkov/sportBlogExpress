@@ -2,9 +2,18 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-    res.render('index', {
-        title: 'Index'
-    });
+    Article.getArticles((err, articles) => {
+        if (err) {
+            res.send(err);
+        }
+        res.render('index', {
+            title: 'Home',
+            articles: articles
+        });
+
+    }, 4);
+
+  
 })
 
 module.exports = router;

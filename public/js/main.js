@@ -1,6 +1,13 @@
 
 // AJAX Delete Category
 $(function () {
+
+    // Initialization Select
+    $('select').material_select();
+
+    // Initialize Dropdown
+    $(".dropdown-button").dropdown();
+
     $('.category-delete').on('click', (e) => {
        
         $target = $(e.target);
@@ -41,5 +48,3 @@ $(function () {
     });
 });
 
-// Initialization Select
-$('select').material_select();

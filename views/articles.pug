@@ -2,4 +2,20 @@
 extends layout
 
 block content
-    h1 #{title}
+    h1.center-align #{title}
+
+    .container
+        .row
+            .col.s12
+            each article, i in articles
+                .card.small
+                    .container
+                        .row
+                            a(href="/article/show/" + article._id)
+                                h2.post-title #{article.title}  
+                            h4.post-subtitle #{article.subtitle}
+                            p.post-meta
+                                | Posted by #{article.author}
+                                | on #{moment(article.created_at).format('MMMM Do YYYY, h:mm:ss a')}
+
+            

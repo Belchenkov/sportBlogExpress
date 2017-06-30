@@ -4,9 +4,17 @@ const router = express.Router();
 const Article = require('../models/article');
 
 router.get('/', (req, res, next) => {
-    res.render('articles', {
-        title: 'Articles'
+    Article.getArticles((err, articles) => {
+        if (err) {
+            res.send(err);
+        }
+
+        res.render('articles', {
+            title: 'Articles',
+            articles: articles
+        });
     });
+
 });
 
 router.get('/show/:id', (req, res, next) => {
@@ -17,9 +25,26 @@ router.get('/show/:id', (req, res, next) => {
 
 
 router.get('/category/:category_id', (req, res, next) => {
-    res.render('articles', {
-        title: 'Category Articles'
+    
+    Article.getCategoryArticles(req.params.category_id, (err, articles) => {
+       if (err) {
+           res.send(err);
+       }
+
+       Category.getCategoryById(req.params.category_id, (err, category) => {
+            
+            if (err) {
+                res.send(err);
+            }
+
+            res.render('articles', {
+                title: category.title,
+                articles: articles
+            });
+       });
+
     });
+   
 });
 
 // Add Article -- POST
