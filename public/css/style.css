@@ -60,3 +60,9 @@ footer p {
     color: #fff;
     background-color: #b71c1c;
 }
+
+form.comment-form {
+    border: 1px solid #009688;
+    margin: 40px auto;
+    text-align: center;
+}
